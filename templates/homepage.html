@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/static/css/homepage.css">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <title>Matching game</title>
+</head>
+
+<body>
+<div id='line1'>
+    <img id='1' src='/static/img/mickey.png' alt='n'></img>
+    <img id='2' src='/static/img/mickey.png' alt='n'></img>
+    <form action="/">
+    <input class='extras' type="submit" value="Play Again?"></input>
+    </form>
+    <label class='extras' id="resultlbl"></label>
+</div>
+
+
+<div id='line2'>
+    <img id='3' src='/static/img/mickey.png' alt='n'></img>
+    <img id='4' src='/static/img/mickey.png' alt='n'></img>
+</div>
+
+
+<script>    
+    var clicked = false
+    var clickedId = 0
+    var matchId = 0
+    baseSrc = "static/img/"
+    imageExt = ".png"
+    var clickFun = function () {
+        
+        if (clicked == true){
+            $("img").off("click");
+            clickedId = this.id;
+            var imageName = (String(clickedId)).concat(imageExt)
+            var imageSrc = baseSrc.concat(imageName);
+            this.src = imageSrc
+            if (matchId == 1 && clickedId == 2 || matchId == 2 && clickedId == 1 || matchId == 3 && clickedId == 4 || matchId == 4 && clickedId == 3 ) {
+
+                $('#resultlbl').text("Match");
+                clickedId = 0
+                matchId = 0
+                setTimeout(function(){
+                    $('#resultlbl').text("");
+
+                }, 2000);
+
+            }else{
+
+                
+                thisImageObject = this
+                
+                setTimeout(function(){
+                    lastImageObject.src = '/static/img/mickey.png'
+
+                }, 2000);
+
+                setTimeout(function(){
+                    thisImageObject.src = '/static/img/mickey.png'
+
+                }, 2000);
+                $('#resultlbl').text("No Match");
+                setTimeout(function(){
+                    $('#resultlbl').text("");
+
+                }, 2000);
+                clickedId = 0
+                matchId = 0
+            };
+
+            clicked = false;
+            setTimeout(function() {
+                $('img').on('click', clickFun);
+            }, 2000);
+            
+
+
+        }
+        else{
+
+            clickedId = this.id;
+            var imageName = (String(clickedId)).concat(imageExt)
+            var imageSrc = baseSrc.concat(imageName);
+            this.src = imageSrc
+
+            console.log(imageSrc)
+            clicked = true
+            matchId = clickedId
+            lastImageObject = this
+        }
+     
+    };
+
+
+    $('img').on('click',clickFun);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+body {
+    margin-top: 0;
+    background-color: black;
+
+    color: white;
+    text-align: center;
+}
+
+
+#line1{
+    height: 100%;
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+#line2{
+    height: 100%;
+    width: 50%;
+    display: inline-block;
+    float: right;
+}
+img{
+    margin-top: 5px;
+    height: 40%;
+    width: 60%;
+}
+.extras{
+    display: inline-block;
+    float: right;
+}
+
